@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exam by Iryna for Helmut</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function RestGet(){
+            var data;
+            $.ajax({
+                type: 'GET',
+                url:  '/run',
+                dataType: 'json',
+                async: true,
+                success: function(result) {
+                    data = result.toString();
+                    $('#show').html(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    data = jqXHR.status + ' ' + jqXHR.responseText;
+                    $('#show').html(data);
+                }
+            });
+        }
+        $(document).ready(function() {
+            RestGet();
+            setInterval('RestGet()', 5000);
+        });
+    </script>
+</head>
+<body>
+ <div id="show"></div>
+</body>
+</html>
